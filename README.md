@@ -43,3 +43,14 @@ The subscriber listens on the same `user_created` queue. When it receives a mess
 
 After launching the subscriber with `cargo run`, we can check our RabbitMQ Management UI — and as seen on the tutorial, there should be at least one active connection, indicating that the subscriber is connected to the broker.
 Then, when we run the publisher (`cargo run` in the publisher directory), it sends 5 events to RabbitMQ. These events are immediately consumed by the subscriber, which logs each message to the console.
+
+### Monitoring Chard Based on Publisher
+![image](https://github.com/user-attachments/assets/18331eea-d81d-416a-a901-09cb0982ecd0)
+**Based on the image above, this graph confirms that the publisher is actively sending data and that the subscriber is consuming it in real-time.**
+
+When the publisher is run using `cargo run`, it sends 5 `UserCreatedEventMessage` messages to the RabbitMQ message broker via the `user_created` queue.
+If we open the RabbitMQ Management UI in our browser (http://localhost:15672), and navigate to the "Queues" section, we will see a spike in the message rates graph for the `user_created` queue.
+This spike represents a sudden increase in activity — in this case, it's caused by the 5 messages being published at once. RabbitMQ visualizes this burst in traffic as a spike in the graph.
+After the messages are sent, the subscriber, which has been listening to the same queue, consumes those messages immediately. As a result, the queue quickly drops back to 0 messages, which we can also clearly observe in the message count.
+
+
