@@ -30,3 +30,6 @@ It means:
 - `localhost:5672` — They both connect to a broker running locally on the default AMQP port `5672`.
 
 This shared URL enables communication between the publisher and subscriber through the same messaging system, forming the core of the **event-driven architecture**.
+
+### Running RabbitMQ as Message Broker
+![image](https://github.com/user-attachments/assets/e25b30ce-e1d2-4fb4-b1bc-7beb235b67ff)
