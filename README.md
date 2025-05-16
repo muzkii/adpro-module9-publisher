@@ -33,3 +33,13 @@ This shared URL enables communication between the publisher and subscriber throu
 
 ### Running RabbitMQ as Message Broker
 ![image](https://github.com/user-attachments/assets/e25b30ce-e1d2-4fb4-b1bc-7beb235b67ff)
+
+### Sending and Processing Event
+![image](https://github.com/user-attachments/assets/33dc39d0-8786-4de8-888a-50ec49cbdbdb)
+
+Both the subscriber and publisher connect to the same RabbitMQ server using the AMQP URL `amqp://guest:guest@localhost:5672`.
+The publisher sends a series of messages to the message broker, specifically to the `user_created` queue. Each message is a `UserCreatedEventMessage`, which contains a unique user ID and username.
+The subscriber listens on the same `user_created` queue. When it receives a message, it processes and prints the content. In this example, it successfully receives and prints all 5 messages sent by the publisher.
+
+After launching the subscriber with `cargo run`, we can check our RabbitMQ Management UI — and as seen on the tutorial, there should be at least one active connection, indicating that the subscriber is connected to the broker.
+Then, when we run the publisher (`cargo run` in the publisher directory), it sends 5 events to RabbitMQ. These events are immediately consumed by the subscriber, which logs each message to the console.
